@@ -1,5 +1,5 @@
 import 'package:cooperation/GUI/add_point_gui.dart';
-import 'package:cooperation/GUI/main_pages/chat_gui.dart';
+import 'package:cooperation/GUI/main_pages/chats_list_gui.dart';
 import 'package:cooperation/GUI/main_pages/help_gui.dart';
 import 'package:cooperation/GUI/main_pages/offer_gui.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +149,7 @@ class _MainGUIState extends State<MainGUI> {
         return OfferGUI();
         break;
       case 2:
-        return ChatGUI();
+        return ChatsListGUI();
         break;
       case 3:
         return UserGUI();
