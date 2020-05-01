@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
+import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/GUI/chat_gui.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -11,9 +13,17 @@ class Point {
   double longitude;
   bool show;
   final String creatorUid;
-  final String creatorEmail;
+  final String creatorName;
 
-  Point({this.id, this.title, this.description, this.latitude, this.longitude, this.show, this.creatorUid, this.creatorEmail});
+  Point(
+      {this.id,
+      this.title,
+      this.description,
+      this.latitude,
+      this.longitude,
+      this.show,
+      this.creatorUid,
+      this.creatorName});
 
   factory Point.fromJson(Map<String, dynamic> json) {
     var latitude = double.parse(json['latitude'].toString());
@@ -27,11 +37,11 @@ class Point {
       longitude: longitude,
       show: json['show'],
       creatorUid: json['creator_uid'],
-      creatorEmail: json['creator_email'],
+      creatorName: json['creator_email'],
     );
   }
 
-  Marker getMarker(BuildContext context){
+  Marker getMarker(BuildContext context) {
     return new Marker(
       markerId: MarkerId(this.id.toString()),
       position: LatLng(this.latitude, this.longitude),
@@ -69,8 +79,8 @@ class Point {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(40),
                               child: CachedNetworkImage(
-                                imageUrl: FirebaseBL.getUserPhotoUrl(
-                                    this.creatorUid),
+                                imageUrl:
+                                    FirebaseBL.getUserPhotoUrl(this.creatorUid),
                                 placeholder: (context, url) =>
                                     CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
@@ -119,12 +129,18 @@ class Point {
                             child: OutlineButton(
                               highlightColor: Colors.blue[100],
                               shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(30.0)),
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
                               onPressed: () => Navigator.pop(context),
-                              child: Text("Cerrar", style: TextStyle(fontSize: 16),),
+                              child: Text(
+                                "Cerrar",
+                                style: TextStyle(fontSize: 16),
+                              ),
                             ),
                           ),
-                          SizedBox(width: 8,),
+                          SizedBox(
+                            width: 8,
+                          ),
                           Expanded(
                             child: OutlineButton(
                               highlightColor: Colors.blue[100],
@@ -134,9 +150,19 @@ class Point {
                                 width: 2, //width of the border
                               ),
                               shape: new RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(30.0)),
-                              onPressed: () => {},
-                              child: Text("Enviar mensaje", style: TextStyle(fontSize: 16),),
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
+                              onPressed: this.creatorUid == UserBL.getUid() ? null : () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatGUI(toName: creatorName, toUid: creatorUid,),
+                                    ));
+                              },
+                              child: Text(
+                                "Enviar mensaje",
+                                style: TextStyle(fontSize: 16),
+                              ),
                             ),
                           ),
                         ],

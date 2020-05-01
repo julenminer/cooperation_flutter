@@ -169,7 +169,7 @@ class _AddPointGUIState extends State<AddPointGUI> {
                                     longitude: _lastPosition.longitude,
                                     show: true,
                                     creatorUid: UserBL.getUid(),
-                                    creatorEmail: UserBL.getEmail(),
+                                    creatorName: UserBL.getName(),
                                   ),
                                   widget.pointType)
                               .then((newPoint) {

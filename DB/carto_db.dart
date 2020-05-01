@@ -99,7 +99,7 @@ class CartoDB {
         ", true, '" +
         point.creatorUid +
         "', '" +
-        point.creatorEmail +
+        point.creatorName +
         "') RETURNING cartodb_id";
     var response = await http.get(_database_query + sql_statement);
     if (response.statusCode == 200) {
@@ -129,7 +129,7 @@ class CartoDB {
         ", true, '" +
         point.creatorUid +
         "', '" +
-        point.creatorEmail +
+        point.creatorName +
         "') RETURNING cartodb_id";
     var response = await http.get(_database_query + sql_statement);
     if (response.statusCode == 200) {

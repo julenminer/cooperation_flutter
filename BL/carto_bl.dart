@@ -62,7 +62,7 @@ class CartoBL {
       longitude: point.longitude,
       show: true,
       creatorUid: point.creatorUid,
-      creatorEmail: point.creatorEmail
+      creatorName: point.creatorName
     );
   }
 

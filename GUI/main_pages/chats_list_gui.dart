@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/GUI/chat_gui.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,6 @@ class _ChatsListGUIState extends State<ChatsListGUI> {
             } else {
               return ListView.separated(
                 separatorBuilder: (context, index) => Divider(),
-                padding: EdgeInsets.all(16),
                 itemBuilder: (context, index) =>
                     ChatListItem(document: snapshot.data.documents[index]),
                 itemCount: snapshot.data.documents.length,
@@ -58,44 +58,62 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(60),
-            child: SizedBox(
-              width: 60,
-              height: 60,
-              child: CachedNetworkImage(
-                imageUrl: FirebaseBL.getUserPhotoUrl(document.data['toUid']),
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatGUI(
+                toName: document.data['toName'],
+                toUid: document.data['toUid'],
+                conversationId: document.data['conversationId'],
               ),
-            ),
-          ),
-          SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  document.data['toName'],
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+            ));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        FirebaseBL.getUserPhotoUrl(document.data['toUid']),
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
-                Text(
-                  document.data['lastMessage'],
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ],
-            ),
+              ),
+              SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      document.data['toName'],
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      document.data['lastMessage'],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
+              ),
+              Icon(Icons.keyboard_arrow_right),
+            ],
           ),
-          Icon(Icons.keyboard_arrow_right),
-        ],
+        ),
       ),
     );
   }
