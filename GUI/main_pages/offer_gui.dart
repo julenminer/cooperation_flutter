@@ -16,12 +16,16 @@ class _OfferGUIState extends State<OfferGUI> {
   LatLng _lastCenter;
   int _frameCount;
   bool _loaded;
+  bool _visibility;
+  int _count;
 
   @override
   void initState() {
     super.initState();
     _markers = new Set();
     _loaded = false;
+    _visibility = false;
+    _count = 0;
     _frameCount = 0;
     _loadMarkers();
   }
@@ -29,32 +33,52 @@ class _OfferGUIState extends State<OfferGUI> {
   @override
   Widget build(BuildContext context) {
     if (_loaded) {
-      return ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(45),
-          topRight: Radius.circular(45),
-        ),
-        child: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: _initialCameraPosition,
-          mapToolbarEnabled: true,
-          zoomControlsEnabled: true,
-          onMapCreated: (controller) {
-            _mapController = controller;
-          },
-          onCameraMove: (position) {
-            _lastCenter = position.target;
-            _frameCount++;
-            if (_frameCount % 20 == 19) {
-              _getMarkers();
-            }
-          },
-          onCameraIdle: () {
-            _getMarkers();
-          },
-          myLocationEnabled: true,
-          markers: _markers,
-        ),
+      return Column(
+        children: <Widget>[
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45),
+                topRight: Radius.circular(45),
+              ),
+              child: GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: _initialCameraPosition,
+                mapToolbarEnabled: true,
+                zoomControlsEnabled: true,
+                onMapCreated: (controller) {
+                  _mapController = controller;
+                },
+                onCameraMove: (position) {
+                  _lastCenter = position.target;
+                  _frameCount++;
+                  if (_frameCount % 10 == 9) {
+                    _frameCount = 0;
+                    _getMarkers();
+                  }
+                },
+                onCameraIdle: () {
+                  _getMarkers();
+                },
+                myLocationEnabled: true,
+                markers: _markers,
+              ),
+            ),
+          ),
+          Visibility(
+            visible: _visibility,
+            child: SizedBox(
+              width: double.maxFinite,
+              child: Container(
+                color: Colors.black,
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Text("Te has alejado demasiado.\nHaz zoom para ver " + _count.toString() + " puntos.", style: TextStyle(color: Colors.white),),
+                ),
+              ),
+            ),
+          ),
+        ],
       );
     } else {
       return Center(
@@ -101,6 +125,11 @@ class _OfferGUIState extends State<OfferGUI> {
           _markers.clear();
         });
         if (zoom > 12) {
+          if (mounted && _visibility) {
+            setState(() {
+              _visibility = false;
+            });
+          }
           for (var point in PointsBL.offerPoints.values) {
             if (bounds.contains(LatLng(point.latitude, point.longitude))) {
               if(mounted){
@@ -118,14 +147,13 @@ class _OfferGUIState extends State<OfferGUI> {
             }
           }
           if(mounted){
+            if (!_visibility) {
+              setState(() {
+                _visibility = true;
+              });
+            }
             setState(() {
-              _markers.add(
-                new Marker(
-                  markerId: MarkerId("cluster"),
-                  position: _lastCenter,
-                  infoWindow: InfoWindow(title: count.toString()),
-                ),
-              );
+              _count = count;
             });
           }
         }

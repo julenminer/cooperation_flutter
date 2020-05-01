@@ -56,10 +56,17 @@ class ListItem extends StatefulWidget {
 
 class _ListItemState extends State<ListItem> {
   bool _isChecked;
+  bool isAppleDevice;
 
   @override
   void initState() {
     super.initState();
+    try {
+      isAppleDevice = Platform.isIOS || Platform.isMacOS;
+    }
+    on Exception {
+      isAppleDevice = false;
+    }
     _isChecked = widget.point.show;
   }
 
@@ -86,7 +93,7 @@ class _ListItemState extends State<ListItem> {
           Column(
             children: <Widget>[
               Text("¿Mostrar?"),
-              (Platform.isIOS || Platform.isMacOS)
+              (isAppleDevice)
                   ? CupertinoSwitch(
                       value: _isChecked,
                       onChanged: _changeShow,

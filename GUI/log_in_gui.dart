@@ -1,7 +1,6 @@
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
 import '../BL/authentication_bl.dart';
 import "main_gui.dart";
 
@@ -50,9 +49,8 @@ class _LogInGUIState extends State<LogInGUI> {
                       children: <Widget>[
                         Container(
                           padding: EdgeInsets.fromLTRB(40, 40, 40, 30),
-                          child: SvgPicture.asset(
-                            "assets/logo.svg",
-                            semanticsLabel: 'Acme Logo',
+                          child: Image.asset(
+                            "assets/logo.png",
                             width: 100.0,
                             height: 100.0,
                           ),

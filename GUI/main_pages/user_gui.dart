@@ -17,6 +17,7 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
     UsersOfferPoints(),
     ProfileGUI()
   ];
+  bool isAppleDevice;
 
   //The Widgets that has to be loaded when a tab is selected.
   int selectedIndex = 0;
@@ -25,12 +26,18 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    try {
+      isAppleDevice = Platform.isIOS || Platform.isMacOS;
+    }
+    on Exception {
+      isAppleDevice = false;
+    }
     _tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS || Platform.isMacOS) {
+    if (isAppleDevice) {
       return Container(
         child: SizedBox.expand(
           child: Column(
