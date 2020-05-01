@@ -24,7 +24,7 @@ class _ChatsListGUIState extends State<ChatsListGUI> {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
-            );U
+            );
           } else {
             if (snapshot.data.documents.length == 0) {
               return SizedBox.expand(
