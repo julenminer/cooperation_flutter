@@ -104,6 +104,10 @@ class _AddPointGUIState extends State<AddPointGUI> {
                               initialCameraPosition: snapshot.data,
                               mapToolbarEnabled: true,
                               zoomControlsEnabled: true,
+                              onMapCreated: (controller) {
+                                _lastPosition = snapshot.data.target;
+                                _updateMarker();
+                              },
                               onCameraMove: (position) {
                                 _lastPosition = position.target;
                                 FocusScope.of(context)
