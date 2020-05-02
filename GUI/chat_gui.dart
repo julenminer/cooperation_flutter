@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
@@ -67,8 +68,32 @@ class _ChatGUIState extends State<ChatGUI> {
                               } else {
                                 return ListView.builder(
                                   reverse: true,
-                                  itemBuilder: (context, index) => Bubble(
-                                      document: snapshot.data.documents[index]),
+                                  itemBuilder: (context, index) {
+                                    DocumentSnapshot document =
+                                        snapshot.data.documents[index];
+                                    bool isUser =
+                                        document.data['uid'] == UserBL.getUid();
+                                    return Bubble(
+                                      margin: BubbleEdges.only(
+                                        top: 10,
+                                        right: isUser ? 8 : 40,
+                                        left: isUser ? 40 : 8,
+                                      ),
+                                      alignment: isUser
+                                          ? Alignment.topRight
+                                          : Alignment.bottomLeft,
+                                      nip: isUser
+                                          ? BubbleNip.rightBottom
+                                          : BubbleNip.leftBottom,
+                                      color: isUser ? Theme.of(context).primaryColorLight : null,
+                                      child: Text(
+                                        document.data['message'],
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   itemCount: snapshot.data.documents.length,
                                 );
                               }
@@ -110,8 +135,9 @@ class _ChatGUIState extends State<ChatGUI> {
   Future<void> _sendMessage() async {
     if (_controller.text.isNotEmpty) {
       if (_conversationIdState == null) {
-        var newConversationId = await FirebaseBL.createConversation(widget.toUid, _controller.text);
-        if(mounted){
+        var newConversationId =
+            await FirebaseBL.createConversation(widget.toUid, _controller.text);
+        if (mounted) {
           setState(() {
             _conversationIdState = newConversationId;
           });
@@ -121,47 +147,5 @@ class _ChatGUIState extends State<ChatGUI> {
       }
       _controller.clear();
     }
-  }
-}
-
-class Bubble extends StatelessWidget {
-  Bubble({@required this.document});
-
-  DocumentSnapshot document;
-
-  @override
-  Widget build(BuildContext context) {
-    String fromUid = document.data['uid'];
-    double leftPadding = 8;
-    double rightPadding = 8;
-    Color bubbleColor;
-    List<Widget> space = [];
-
-    if (fromUid == UserBL.getUid()) {
-      leftPadding += 16;
-      bubbleColor = Colors.blue[300];
-      space.add(          Expanded(child: Container(),),
-      );
-    } else {
-      rightPadding += 16;
-      bubbleColor = Colors.grey[300];
-    }
-    return Padding(
-      padding: EdgeInsets.fromLTRB(leftPadding, 8, rightPadding, 8),
-      child: Row(
-        children: space+  <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(80),
-            child: Container(
-              color: bubbleColor,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(document.data['message']),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }
