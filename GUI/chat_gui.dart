@@ -23,16 +23,17 @@ class _ChatGUIState extends State<ChatGUI> {
   void initState() {
     super.initState();
     _conversationIdState = widget.conversationId;
-    if(_conversationIdState == null) {
+    if (_conversationIdState == null) {
       _checkIfConversationExists();
     }
     _controller = new TextEditingController();
   }
 
   Future<void> _checkIfConversationExists() async {
-    var conversationId = await FirebaseBL.getConversationId(UserBL.getUid(), widget.toUid);
-    if(conversationId != null) {
-      if(mounted) {
+    var conversationId =
+        await FirebaseBL.getConversationId(UserBL.getUid(), widget.toUid);
+    if (conversationId != null) {
+      if (mounted) {
         setState(() {
           _conversationIdState = conversationId;
         });
@@ -80,6 +81,22 @@ class _ChatGUIState extends State<ChatGUI> {
                                   child: CircularProgressIndicator(),
                                 );
                               } else {
+                                Firestore.instance
+                                    .collection("conversations")
+                                    .where("fromUid",
+                                        isEqualTo: UserBL.getUid())
+                                    .where("toUid", isEqualTo: widget.toUid)
+                                    .getDocuments()
+                                    .then((documents) {
+                                  if (documents.documents.length > 0) {
+                                    documents.documents
+                                        .elementAt(0)
+                                        .reference
+                                        .updateData({
+                                      "lastRead": true,
+                                    });
+                                  }
+                                });
                                 return ListView.builder(
                                   reverse: true,
                                   itemBuilder: (context, index) {
@@ -99,7 +116,9 @@ class _ChatGUIState extends State<ChatGUI> {
                                       nip: isUser
                                           ? BubbleNip.rightBottom
                                           : BubbleNip.leftBottom,
-                                      color: isUser ? Theme.of(context).primaryColorLight : null,
+                                      color: isUser
+                                          ? Theme.of(context).primaryColorLight
+                                          : null,
                                       child: Text(
                                         document.data['message'],
                                         style: TextStyle(

@@ -110,6 +110,19 @@ class ChatListItem extends StatelessWidget {
                   ],
                 ),
               ),
+              Visibility(
+                visible: !document.data['lastRead'],
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(80),
+                  child: SizedBox(
+                    height: 15,
+                    width: 15,
+                    child: Container(
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ),
+                ),
+              ),
               Icon(Icons.keyboard_arrow_right),
             ],
           ),
