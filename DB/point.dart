@@ -37,7 +37,7 @@ class Point {
       longitude: longitude,
       show: json['show'],
       creatorUid: json['creator_uid'],
-      creatorName: json['creator_email'],
+      creatorName: json['creator_name'],
     );
   }
 

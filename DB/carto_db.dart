@@ -16,7 +16,7 @@ class CartoDB {
   static final String _database_query = _database_url + _query_start;
 
   static Future<List<dynamic>> getHelpPoints() async {
-    var query = "SELECT * FROM help_points WHERE show=true";
+    var query = "SELECT * FROM help_points_tfm WHERE show=true";
     var response = await http.get(_database_query + query);
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
@@ -28,7 +28,7 @@ class CartoDB {
   }
 
   static Future<List<dynamic>> getUsersHelpPoints(String uid) async {
-    var query = "SELECT * FROM help_points WHERE creator_uid='" + uid + "'";
+    var query = "SELECT * FROM help_points_tfm WHERE creator_uid='" + uid + "'";
     var response = await http.get(_database_query + query);
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
@@ -40,7 +40,7 @@ class CartoDB {
   }
 
   static Future<List<dynamic>> getOfferPoints() async {
-    var query = "SELECT * FROM offer_points WHERE show=true";
+    var query = "SELECT * FROM offer_points_tfm WHERE show=true";
     var response = await http.get(_database_query + query);
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
@@ -52,7 +52,7 @@ class CartoDB {
   }
 
   static Future<String> setHelpShow(int id, bool newValue) async {
-    var query = "UPDATE help_points SET show=" +
+    var query = "UPDATE help_points_tfm SET show=" +
         newValue.toString() +
         " WHERE cartodb_id=" +
         id.toString();
@@ -61,7 +61,7 @@ class CartoDB {
   }
 
   static Future<String> setOfferShow(int id, bool newValue) async {
-    var query = "UPDATE offer_points SET show=" +
+    var query = "UPDATE offer_points_tfm SET show=" +
         newValue.toString() +
         " WHERE cartodb_id=" +
         id.toString();
@@ -70,7 +70,7 @@ class CartoDB {
   }
 
   static Future<List<dynamic>> getUsersOfferPoints(String uid) async {
-    var query = "SELECT * FROM offer_points WHERE creator_uid='" + uid + "'";
+    var query = "SELECT * FROM offer_points_tfm WHERE creator_uid='" + uid + "'";
     var response = await http.get(_database_query + query);
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
@@ -82,8 +82,8 @@ class CartoDB {
   }
 
   static Future<dynamic> insertHelpPoint(Point point) async {
-    var sql_statement = "INSERT INTO help_points " +
-        "(the_geom, name, description, latitude, longitude, show, creator_uid, creator_email) VALUES " +
+    var sql_statement = "INSERT INTO help_points_tfm " +
+        "(the_geom, name, description, latitude, longitude, show, creator_uid, creator_name) VALUES " +
         "(ST_SetSRID(ST_Point(" +
         point.longitude.toString() +
         ", " +
@@ -112,8 +112,8 @@ class CartoDB {
   }
 
   static Future<int> insertOfferPoint(Point point) async {
-    var sql_statement = "INSERT INTO offer_points " +
-        "(the_geom, name, description, latitude, longitude, show, creator_uid, creator_email) VALUES " +
+    var sql_statement = "INSERT INTO offer_points_tfm " +
+        "(the_geom, name, description, latitude, longitude, show, creator_uid, creator_name) VALUES " +
         "(ST_SetSRID(ST_Point(" +
         point.longitude.toString() +
         ", " +
