@@ -3,9 +3,12 @@ import 'package:cooperation/DB/firebase_db.dart';
 
 class FirebaseBL {
   static String getUserPhotoUrl(String uid) {
-    return "http://via.placeholder.com/350x350";
+    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + "_100x100.png";
   }
 
+  static String getUserOriginalPhotoUrl(String uid) {
+    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + ".png";
+  }
   static Future<String> createConversation(String toUid, String message) async {
     return await FirebaseDB.createConversation(toUid, UserBL.getUid(), UserBL.getName(), message);
   }

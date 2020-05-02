@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:http/http.dart' as http;
 
 class FirebaseDB {
   static Future<String> createConversation(
@@ -52,10 +56,7 @@ class FirebaseDB {
           .where("conversationId", isEqualTo: conversationId)
           .getDocuments();
       for (var document in query.documents) {
-        await Firestore.instance
-            .collection("conversations")
-            .document(document.documentID)
-            .updateData({
+        await document.reference.updateData({
           "lastMessage": message,
           "lastMessageDate": timestamp,
           "lastRead": document.data['fromUid'] == fromUid,
@@ -70,10 +71,33 @@ class FirebaseDB {
         .where('fromUid', isEqualTo: fromUid)
         .where('toUid', isEqualTo: toUid)
         .getDocuments();
-    if(documents.documents.length == 0) {
+    if (documents.documents.length == 0) {
       return null;
     } else {
       return documents.documents.elementAt(0).data['conversationId'];
+    }
+  }
+
+  static Future<void> saveUserInfo(
+      String uid, String name, String photoURL) async {
+    final doc = Firestore.instance.collection('users').document(uid);
+    var snapshot = await doc.get();
+    if (!snapshot.exists) {
+      await doc.setData({
+        'name': name,
+      });
+
+      var response = await http.get(photoURL);
+      if (response.statusCode == 200) {
+        final StorageReference storageReference = FirebaseStorage().ref().child("userImages/"+uid+".png");
+
+        final StorageUploadTask uploadTask = storageReference.putData(response.bodyBytes, StorageMetadata(
+          contentType: 'image/png',
+        ),);
+        await uploadTask.onComplete;
+      } else {
+        print("ERROR: " + response.body);
+      }
     }
   }
 }

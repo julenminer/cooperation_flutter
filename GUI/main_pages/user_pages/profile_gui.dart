@@ -1,4 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:async';
+
+import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/authentication_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/log_in_gui.dart';
@@ -32,13 +34,9 @@ class _ProfileGUIState extends State<ProfileGUI> {
                       width: 150,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: CachedNetworkImage(
-                          imageUrl: UserBL.getPhotoUrl(),
+                        child: Image(
                           fit: BoxFit.fill,
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                          image: CacheImage(UserBL.getPhotoUrl()),
                         ),
                       ),
                     ),

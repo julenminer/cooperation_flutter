@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cooperation/DB/firebase_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -32,6 +33,10 @@ class Auth {
   /// in Firestore and return the user id.
   Future<String> _signIn(AuthCredential credential, String langCode, String countryCode) async {
     FirebaseUser user = (await _firebaseAuth.signInWithCredential(credential)).user;
+    if (user != null) {
+      FirebaseDB.saveUserInfo(
+          user.uid, user.displayName, user.photoUrl);
+    }
     return user.uid;
   }
 

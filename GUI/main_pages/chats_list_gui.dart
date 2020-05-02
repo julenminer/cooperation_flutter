@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
@@ -80,11 +80,9 @@ class ChatListItem extends StatelessWidget {
                 child: SizedBox(
                   width: 60,
                   height: 60,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        FirebaseBL.getUserPhotoUrl(document.data['toUid']),
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  child: Image(
+                    fit: BoxFit.fill,
+                    image: CacheImage(FirebaseBL.getUserPhotoUrl(document.data['toUid'])),
                   ),
                 ),
               ),

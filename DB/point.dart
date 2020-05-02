@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
@@ -78,13 +78,11 @@ class Point {
                             height: 40,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(40),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    FirebaseBL.getUserPhotoUrl(this.creatorUid),
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                              child: Image(
+                                fit: BoxFit.fill,
+                                image: CacheImage(
+                                  FirebaseBL.getUserPhotoUrl(this.creatorUid),
+                                ),
                               ),
                             ),
                           ),
@@ -152,13 +150,18 @@ class Point {
                               shape: new RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(30.0)),
-                              onPressed: this.creatorUid == UserBL.getUid() ? null : () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ChatGUI(toName: creatorName, toUid: creatorUid,),
-                                    ));
-                              },
+                              onPressed: this.creatorUid == UserBL.getUid()
+                                  ? null
+                                  : () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ChatGUI(
+                                              toName: creatorName,
+                                              toUid: creatorUid,
+                                            ),
+                                          ));
+                                    },
                               child: Text(
                                 "Enviar mensaje",
                                 style: TextStyle(fontSize: 16),
