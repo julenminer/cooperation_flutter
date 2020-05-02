@@ -63,4 +63,17 @@ class FirebaseDB {
       }
     }
   }
+
+  static Future<String> getConversationId(String fromUid, String toUid) async {
+    var documents = await Firestore.instance
+        .collection('conversations')
+        .where('fromUid', isEqualTo: fromUid)
+        .where('toUid', isEqualTo: toUid)
+        .getDocuments();
+    if(documents.documents.length == 0) {
+      return null;
+    } else {
+      return documents.documents.elementAt(0).data['conversationId'];
+    }
+  }
 }

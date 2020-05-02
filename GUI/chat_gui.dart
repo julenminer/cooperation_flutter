@@ -23,7 +23,21 @@ class _ChatGUIState extends State<ChatGUI> {
   void initState() {
     super.initState();
     _conversationIdState = widget.conversationId;
+    if(_conversationIdState == null) {
+      _checkIfConversationExists();
+    }
     _controller = new TextEditingController();
+  }
+
+  Future<void> _checkIfConversationExists() async {
+    var conversationId = await FirebaseBL.getConversationId(UserBL.getUid(), widget.toUid);
+    if(conversationId != null) {
+      if(mounted) {
+        setState(() {
+          _conversationIdState = conversationId;
+        });
+      }
+    }
   }
 
   @override

@@ -13,4 +13,8 @@ class FirebaseBL {
   static Future<void> sendMessage(String message, String conversationId) async {
     return await FirebaseDB.sendMessage(UserBL.getUid(), message, DateTime.now(), conversationId, true);
   }
+
+  static Future<String> getConversationId(String fromUid, String toUid) async {
+    return await FirebaseDB.getConversationId(fromUid, toUid);
+  }
 }
