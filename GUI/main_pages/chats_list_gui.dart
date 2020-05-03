@@ -19,7 +19,7 @@ class _ChatsListGUIState extends State<ChatsListGUI> {
         stream: Firestore.instance
             .collection('conversations')
             .where('fromUid', isEqualTo: UserBL.getUid())
-            .orderBy("lastMessageDate")
+            .orderBy("lastMessageDate", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
