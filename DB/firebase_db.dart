@@ -100,4 +100,9 @@ class FirebaseDB {
       }
     }
   }
+
+  static Future<String> getUserName(String uid) async {
+    final doc = await Firestore.instance.collection('users').document(uid).get();
+    return doc.data['name'];
+  }
 }

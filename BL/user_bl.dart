@@ -1,24 +1,23 @@
 import 'dart:io';
 
+import 'package:cooperation/BL/firebase_bl.dart';
+import 'package:cooperation/DB/firebase_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// Class to maintain the session of the user and perform functions with it.
 class UserBL {
   static FirebaseUser _user;
+  static String _name;
 
   /// Initializes the value of the user with the uid.
   static Future<void> init(FirebaseUser user) async {
     _user = user;
+    _name = await FirebaseDB.getUserName(user.uid);
   }
 
   /// Checks if the user is logged.
   static bool isLogged() {
     return _user != null;
-  }
-
-  /// Given a [uid], returns the corresponding user.
-  static FirebaseUser getUser(String uid)  {
-    return _user;
   }
 
   /// Updates and returns the information of the current user.
@@ -35,12 +34,12 @@ class UserBL {
   /// Returns the name url of the current user.
   static String getName() {
     assert(_user != null);
-    return _user.displayName;
+    return _name;
   }
 
   static String getPhotoUrl() {
     assert(_user != null);
-    return _user.photoUrl;
+    return FirebaseBL.getUserPhotoUrl(getUid());
   }
 
   static String getEmail() {
