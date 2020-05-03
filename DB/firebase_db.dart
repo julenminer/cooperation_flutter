@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/DB/carto_db.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -89,11 +90,15 @@ class FirebaseDB {
 
       var response = await http.get(photoURL);
       if (response.statusCode == 200) {
-        final StorageReference storageReference = FirebaseStorage().ref().child("userImages/"+uid+".png");
+        final StorageReference storageReference =
+            FirebaseStorage().ref().child("userImages/" + uid + ".png");
 
-        final StorageUploadTask uploadTask = storageReference.putData(response.bodyBytes, StorageMetadata(
-          contentType: 'image/png',
-        ),);
+        final StorageUploadTask uploadTask = storageReference.putData(
+          response.bodyBytes,
+          StorageMetadata(
+            contentType: 'image/png',
+          ),
+        );
         await uploadTask.onComplete;
       } else {
         print("ERROR: " + response.body);
@@ -102,7 +107,57 @@ class FirebaseDB {
   }
 
   static Future<String> getUserName(String uid) async {
-    final doc = await Firestore.instance.collection('users').document(uid).get();
+    final doc =
+        await Firestore.instance.collection('users').document(uid).get();
     return doc.data['name'];
+  }
+
+  /// Given the user id, an image and a new name, it updates the information
+  /// of the user.
+  ///
+  /// Requires the [uid]. [image] and [name] are optional, updates
+  /// the non null values of this parameters in the database.
+  static Future<void> updateUser(String uid, File image, String name) async {
+    Map<String, dynamic> newValues = {};
+    if (name != null) {
+      newValues.addAll({'name': name});
+      CartoDB.updateCreatorName(uid, name);
+
+      var conversations = await Firestore.instance.collection("conversations").where("toUid", isEqualTo: uid).getDocuments();
+
+      for(var convDocument in conversations.documents){
+        convDocument.reference.updateData({"toName": name});
+      }
+    }
+    String imageUrl;
+    if (image != null) {
+      String path = "userImages/" + uid + ".png";
+      String path_small = "userImages/" + uid + "_100x100.png";
+      final StorageReference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child(path);
+      try {
+        await firebaseStorageRef.delete();
+      } catch (e) {
+        print(e.toString());
+      }
+
+      final StorageReference firebaseStorageRef_small =
+          FirebaseStorage.instance.ref().child(path_small);
+      try {
+        await firebaseStorageRef_small.delete();
+      } catch (e) {
+        print(e.toString());
+      }
+
+      final StorageUploadTask task = firebaseStorageRef.putFile(
+        image,
+        StorageMetadata(
+          contentType: 'image/png',
+        ),
+      );
+      StorageTaskSnapshot storageTaskSnapshot = await task.onComplete;
+      imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
+      newValues.addAll({'imageUrl': imageUrl});
+    }
   }
 }

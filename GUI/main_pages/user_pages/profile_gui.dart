@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/authentication_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/GUI/edit_profile_gui.dart';
 import 'package:cooperation/GUI/log_in_gui.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +14,14 @@ class ProfileGUI extends StatefulWidget {
 }
 
 class _ProfileGUIState extends State<ProfileGUI> {
+  String _photoUrl;
+  String _name;
+  
   @override
   void initState() {
     super.initState();
-    UserBL.getUpdatedCurrentUser();
+    _photoUrl = UserBL.getPhotoUrl();
+    _name = UserBL.getName();
   }
 
   @override
@@ -73,7 +79,25 @@ class _ProfileGUIState extends State<ProfileGUI> {
                   highlightColor: Colors.blue[100],
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileGUI(),
+                      ),
+                    ).then((value) {
+                      if(value != null && value) {
+                        UserBL.updateCurrentUser().then((value) {
+                          if(mounted) {
+                            setState(() {
+                              _photoUrl = UserBL.getPhotoUrl();
+                              _name = UserBL.getName();
+                            });
+                          }
+                        });
+                      }
+                    });
+                  },
                   child: Text(
                     "Editar perfil",
                     style: TextStyle(fontSize: 16),

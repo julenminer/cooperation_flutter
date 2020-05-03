@@ -21,8 +21,9 @@ class UserBL {
   }
 
   /// Updates and returns the information of the current user.
-  static Future<FirebaseUser> getUpdatedCurrentUser() async {
-    return await FirebaseAuth.instance.currentUser();
+  static Future<void> updateCurrentUser() async {
+    _user = await FirebaseAuth.instance.currentUser();
+    _name = await FirebaseDB.getUserName(_user.uid);
   }
 
   /// Returns the uid of the current user.
@@ -45,5 +46,11 @@ class UserBL {
   static String getEmail() {
     assert(_user != null);
     return _user.email;
+  }
+
+  /// Updates the information of the user.
+  static Future<void> updateUser(File image, String name) async {
+    await FirebaseDB.updateUser(UserBL.getUid(), image, name);
+    await updateCurrentUser();
   }
 }

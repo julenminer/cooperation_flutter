@@ -70,7 +70,8 @@ class CartoDB {
   }
 
   static Future<List<dynamic>> getUsersOfferPoints(String uid) async {
-    var query = "SELECT * FROM offer_points_tfm WHERE creator_uid='" + uid + "'";
+    var query =
+        "SELECT * FROM offer_points_tfm WHERE creator_uid='" + uid + "'";
     var response = await http.get(_database_query + query);
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
@@ -139,5 +140,22 @@ class CartoDB {
       print(response.body);
       return null;
     }
+  }
+
+  static Future<void> updateCreatorName(String uid, String newName) async {
+    var query_help = "UPDATE help_points_tfm SET creator_name='" +
+        newName +
+        "' WHERE creator_uid='" +
+        uid +
+        "'";
+    var query_offer = "UPDATE offer_points_tfm SET creator_name='" +
+        newName +
+        "' WHERE creator_uid='" +
+        uid +
+        "'";
+    var response_help = await http.get(_database_query + query_help);
+    var response_offer = await http.get(_database_query + query_offer);
+    print("Help update {" + response_help.statusCode.toString() + "}: " + response_help.body);
+    print("Offer update {" + response_offer.statusCode.toString() + "}: " + response_offer.body);
   }
 }
