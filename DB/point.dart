@@ -64,7 +64,7 @@ class Point {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Center(child: Text("Ayuda")),
+                      Center(child: Text("Información")),
                       SizedBox(
                         height: 8,
                       ),
