@@ -106,7 +106,8 @@ class _ChatGUIState extends State<ChatGUI> {
                                         document.data['uid'] == UserBL.getUid();
                                     return Bubble(
                                       margin: BubbleEdges.only(
-                                        top: 10,
+                                        top: 6,
+                                        bottom: 4,
                                         right: isUser ? 8 : 40,
                                         left: isUser ? 40 : 8,
                                       ),
