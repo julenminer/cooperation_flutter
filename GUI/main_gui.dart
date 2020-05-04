@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cooperation/GUI/add_point_gui.dart';
 import 'package:cooperation/GUI/main_pages/chats_list_gui.dart';
 import 'package:cooperation/GUI/main_pages/help_gui.dart';
 import 'package:cooperation/GUI/main_pages/offer_gui.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -19,13 +23,66 @@ class _MainGUIState extends State<MainGUI> {
 
   int _currentIndex;
 
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+
   @override
   void initState() {
+    super.initState();
     _currentIndex = 0;
     _body = _getBody(_currentIndex);
     _title = _getTitle(_currentIndex);
-    super.initState();
+    firebaseCloudMessaging_Listeners();
   }
+
+  void iOS_Permission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
+  }
+
+  void firebaseCloudMessaging_Listeners() {
+    if (Platform.isIOS) iOS_Permission();
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        Flushbar(
+          duration: Duration(seconds: 5),
+          message: message['notification']['body'],
+          backgroundGradient: LinearGradient(
+            colors: [Colors.blue, Colors.teal],
+          ),
+          mainButton: FlatButton(
+              child: Icon(
+                Icons.keyboard_arrow_right,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _onTabSelected(2);
+              }),
+          backgroundColor: Colors.red,
+          boxShadows: [
+            BoxShadow(
+              color: Colors.blue[800],
+              offset: Offset(0.0, 2.0),
+              blurRadius: 3.0,
+            )
+          ],
+        )..show(context);
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        _onTabSelected(2);
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        _onTabSelected(2);
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
