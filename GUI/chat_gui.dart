@@ -167,18 +167,19 @@ class _ChatGUIState extends State<ChatGUI> {
 
   Future<void> _sendMessage() async {
     if (_controller.text.isNotEmpty) {
+      String text = _controller.text;
+      _controller.clear();
       if (_conversationIdState == null) {
         var newConversationId =
-            await FirebaseBL.createConversation(widget.toUid, _controller.text);
+            await FirebaseBL.createConversation(widget.toUid, text);
         if (mounted) {
           setState(() {
             _conversationIdState = newConversationId;
           });
         }
       } else {
-        await FirebaseBL.sendMessage(_controller.text, _conversationIdState);
+        await FirebaseBL.sendMessage(text, _conversationIdState, widget.toUid);
       }
-      _controller.clear();
     }
   }
 }

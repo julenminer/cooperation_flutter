@@ -80,14 +80,14 @@ class FirebaseDB {
   }
 
   static Future<void> saveUserInfo(
-      String uid, String name, String photoURL) async {
+      String uid, String name, String photoURL, String token) async {
     final doc = Firestore.instance.collection('users').document(uid);
     var snapshot = await doc.get();
     if (!snapshot.exists) {
       await doc.setData({
         'name': name,
+        'tokens': [token]
       });
-
       var response = await http.get(photoURL);
       if (response.statusCode == 200) {
         final StorageReference storageReference =
@@ -103,7 +103,23 @@ class FirebaseDB {
       } else {
         print("ERROR: " + response.body);
       }
+    } else {
+      await addToken(uid, token);
     }
+  }
+
+  static Future<void> addToken(String uid, String token) async {
+    final doc = Firestore.instance.collection('users').document(uid);
+    await doc.updateData({
+      'tokens': FieldValue.arrayUnion([token]),
+    });
+  }
+
+  static Future<void> removeToken(String uid, String token) async {
+    final doc = Firestore.instance.collection('users').document(uid);
+    await doc.updateData({
+      'tokens': FieldValue.arrayRemove([token]),
+    });
   }
 
   static Future<String> getUserName(String uid) async {

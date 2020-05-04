@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/DB/firebase_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 /// Class to authenticate users and mantain the log in.
@@ -34,8 +36,9 @@ class Auth {
   Future<String> _signIn(AuthCredential credential, String langCode, String countryCode) async {
     FirebaseUser user = (await _firebaseAuth.signInWithCredential(credential)).user;
     if (user != null) {
+      String token = await FirebaseMessaging().getToken();
       FirebaseDB.saveUserInfo(
-          user.uid, user.displayName, user.photoUrl);
+          user.uid, user.displayName, user.photoUrl, token);
     }
     return user.uid;
   }
@@ -55,6 +58,9 @@ class Auth {
 
   /// Sing out function to remove the user from the device.
   Future<void> signOut() async {
+    String token = await FirebaseMessaging().getToken();
+    await FirebaseDB.removeToken(UserBL.getUid(), token);
+    UserBL.signOut();
     return await _firebaseAuth.signOut();
   }
 }

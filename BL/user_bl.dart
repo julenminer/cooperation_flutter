@@ -53,4 +53,9 @@ class UserBL {
     await FirebaseDB.updateUser(UserBL.getUid(), image, name);
     await updateCurrentUser();
   }
+
+  static void signOut() {
+    _user = null;
+    _name = null;
+  }
 }
