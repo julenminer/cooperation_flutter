@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'BL/authentication_bl.dart';
@@ -99,8 +101,19 @@ class _MyAppState extends State<MyApp> {
             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
             child: child),
         title: 'Cooperation',
-        locale: Locale(_languageCode, _countryCode),
-        supportedLocales: [Locale('en', 'US'), Locale('es', 'ES')],
+        localizationsDelegates: [
+          AppLocalizationsDelegate(),
+          // ... app-specific localization delegate[s] here
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en'), // English
+          const Locale('es'), // Spanish
+          // ... other locales the app supports
+        ],
+        locale: Locale('es'),
         debugShowCheckedModeBanner: false,
         theme: _getTheme(_themeMode),
         home: home);

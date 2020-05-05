@@ -2,6 +2,7 @@ import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,7 +33,7 @@ class _ChatsListGUIState extends State<ChatsListGUI> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Aún no tienes ningún mensaje.",
+                    AppLocalizations().noMessages,
                     textAlign: TextAlign.center,
                   ),
                 ),

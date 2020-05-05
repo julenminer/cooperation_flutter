@@ -1,4 +1,5 @@
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../BL/authentication_bl.dart';
@@ -58,7 +59,7 @@ class _LogInGUIState extends State<LogInGUI> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(60, 0, 60, 25.0),
                           child: Text(
-                            "Inicia sesión y comienza a cooperar",
+                            AppLocalizations().logInAndStart,
                             style: Theme.of(context).textTheme.headline6,
                             textAlign: TextAlign.center,
                           ),
@@ -67,7 +68,7 @@ class _LogInGUIState extends State<LogInGUI> {
                           padding: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                           child: _signUpButton(
                               Image.asset("assets/google-logo.png"),
-                              "Inicia sesión con Google",
+                              AppLocalizations().logInGoogle,
                               Colors.grey[300],
                               Colors.black,
                               _googleLogin),
@@ -104,7 +105,7 @@ class _LogInGUIState extends State<LogInGUI> {
           });
         }
         final snackBar = SnackBar(
-          content: Text("Error desconocido"),
+          content: Text(AppLocalizations().errorLogIn),
         );
         _scaffoldKey.currentState.showSnackBar(snackBar);
       }
@@ -116,7 +117,7 @@ class _LogInGUIState extends State<LogInGUI> {
       }
       if (error.toString() == "Unknown") {
         final snackBar = SnackBar(
-          content: Text("Error desconocido"),
+          content: Text(AppLocalizations().errorLogIn),
         );
         _scaffoldKey.currentState.showSnackBar(snackBar);
       }

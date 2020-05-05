@@ -4,6 +4,7 @@ import 'package:cooperation/BL/carto_bl.dart';
 import 'package:cooperation/BL/points_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/DB/point.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -92,7 +93,7 @@ class _ListItemState extends State<ListItem> {
           ),
           Column(
             children: <Widget>[
-              Text("¿Mostrar?"),
+              Text(AppLocalizations().showQ),
               (isAppleDevice)
                   ? CupertinoSwitch(
                 value: _isChecked,

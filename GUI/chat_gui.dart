@@ -2,6 +2,7 @@ import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,7 @@ class _ChatGUIState extends State<ChatGUI> {
                   child: _conversationIdState == null
                       ? Center(
                           child: Text(
-                          "¡Envía el primer mensaje!",
+                          AppLocalizations().sendFirstMessage,
                           textAlign: TextAlign.end,
                         ))
                       : Container(
@@ -142,7 +143,7 @@ class _ChatGUIState extends State<ChatGUI> {
                   controller: _controller,
                   textCapitalization: TextCapitalization.sentences,
                   autocorrect: true,
-                  placeholder: "Mensaje",
+                  placeholder: AppLocalizations().message,
                   prefix: SizedBox(
                     width: 8,
                   ),

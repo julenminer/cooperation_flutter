@@ -1,0 +1,170 @@
+{
+  "@@last_modified": "2020-05-05T13:55:58.441737",
+  "help": "Ayuda",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "helpOffer": "Oferta de ayuda",
+  "@helpOffer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chat": "Chat",
+  "@chat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "profile": "Perfil",
+  "@profile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logInAndStart": "Inicia sesión y comienza a cooperar",
+  "@logInAndStart": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logInGoogle": "Inicia sesión con Google",
+  "@logInGoogle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLogIn": "Error al iniciar sesión, pruebe de nuevo",
+  "@errorLogIn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editProfile": "Editar perfil",
+  "@editProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editImage": "Editar imagen",
+  "@editImage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "Nombre",
+  "@name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveChanges": "Guardar cambios",
+  "@saveChanges": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "openCamera": "Abrir cámara",
+  "@openCamera": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "openGallery": "Abrir galería",
+  "@openGallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Cancelar",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noChanges": "No has realizado cambios",
+  "@noChanges": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendFirstMessage": "¡Envía el primer mensaje!",
+  "@sendFirstMessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "Mensaje",
+  "@message": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "askForHelp": "Pedir ayuda",
+  "@askForHelp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "offerYourHelp": "Ofrecer ayuda",
+  "@offerYourHelp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "title": "Título",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleError": "El título no puede estar vacío",
+  "@titleError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "description": "Descripción",
+  "@description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionError": "La descripción no puede estar vacía",
+  "@descriptionError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "location": "Ubicación",
+  "@location": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "publish": "Publicar",
+  "@publish": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myProfile": "Mi perfil",
+  "@myProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "zoomTooFar": "{howMany,plural, =0{Te has alejado demasiado. No hay puntos en esta región.}=1{Te has alejado demasiado. Haz zoom para ver {howMany} punto.}other{Te has alejado demasiado. Haz zoom para ver {howMany} puntos.}}",
+  "@zoomTooFar": {
+    "type": "text",
+    "placeholders": {
+      "howMany": {}
+    }
+  },
+  "noMessages": "Aún no tienes ningún mensaje",
+  "@noMessages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showQ": "¿Mostrar?",
+  "@showQ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logOut": "Cerrar sesión",
+  "@logOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "information": "Información",
+  "@information": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "close": "Cerrar",
+  "@close": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendMessage": "Enviar mensaje",
+  "@sendMessage": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

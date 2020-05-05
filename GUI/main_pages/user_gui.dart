@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cooperation/GUI/main_pages/user_pages/profile_gui.dart';
 import 'package:cooperation/GUI/main_pages/user_pages/users_help_points.dart';
 import 'package:cooperation/GUI/main_pages/user_pages/users_offer_points.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -55,9 +56,9 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                       }
                     },
                     children: {
-                      0: Text("Pedir ayuda"),
-                      1: Text("Ofrecer ayuda"),
-                      2: Text("Mi perfil"),
+                      0: Text(AppLocalizations().askForHelp),
+                      1: Text(AppLocalizations().offerYourHelp),
+                      2: Text(AppLocalizations().myProfile),
                     },
                     groupValue: selectedIndex,
                   ),
@@ -80,13 +81,13 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                 unselectedLabelColor: Colors.black54,
                 tabs: [
                   Tab(
-                    text: "Pedir ayuda",
+                    text: AppLocalizations().askForHelp,
                   ),
                   Tab(
-                    text: "Ofrecer ayuda",
+                    text: AppLocalizations().offerYourHelp,
                   ),
                   Tab(
-                    text: "Mi perfil",
+                    text: AppLocalizations().myProfile,
                   ),
                 ],
               ),

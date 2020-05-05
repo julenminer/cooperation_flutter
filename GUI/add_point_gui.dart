@@ -2,6 +2,7 @@ import 'package:cooperation/BL/carto_bl.dart';
 import 'package:cooperation/BL/points_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/DB/point.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -49,8 +50,8 @@ class _AddPointGUIState extends State<AddPointGUI> {
             iconTheme: IconThemeData(color: Colors.black),
             title: Text(
               widget.pointType == PointType.help
-                  ? "Pedir ayuda"
-                  : "Ofrecer ayuda",
+                  ? AppLocalizations().askForHelp
+                  : AppLocalizations().offerYourHelp,
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.transparent,
@@ -67,9 +68,9 @@ class _AddPointGUIState extends State<AddPointGUI> {
                     controller: _titleController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                        labelText: 'Título',
+                        labelText: AppLocalizations().title,
                         errorText: _titleValidate
-                            ? "El título no puede estar vacío"
+                            ? AppLocalizations().titleError
                             : null),
                   ),
                   TextField(
@@ -77,16 +78,16 @@ class _AddPointGUIState extends State<AddPointGUI> {
                     controller: _descriptionController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                        labelText: 'Descripción',
+                        labelText: AppLocalizations().description,
                         errorText: _descriptionValidate
-                            ? "La descripción no puede estar vacía"
+                            ? AppLocalizations().descriptionError
                             : null),
                   ),
                   SizedBox(
                     height: 16,
                   ),
                   Text(
-                    "Ubicación",
+                    AppLocalizations().location,
                     style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(
@@ -189,7 +190,7 @@ class _AddPointGUIState extends State<AddPointGUI> {
                       child: _isLoading
                           ? LinearProgressIndicator()
                           : Text(
-                              "Publicar",
+                              AppLocalizations().publish,
                               style: TextStyle(fontSize: 18),
                             ),
                     ),

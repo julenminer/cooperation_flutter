@@ -1,0 +1,170 @@
+{
+  "@@last_modified": "2020-05-05T13:55:58.441737",
+  "help": "Help",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "helpOffer": "Help offers",
+  "@helpOffer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chat": "Chat",
+  "@chat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "profile": "Profile",
+  "@profile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logInAndStart": "Log in and start cooperating",
+  "@logInAndStart": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logInGoogle": "Log in with Google",
+  "@logInGoogle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLogIn": "Log in error, please try again",
+  "@errorLogIn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editProfile": "Edit profile",
+  "@editProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "editImage": "Edit image",
+  "@editImage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "Name",
+  "@name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveChanges": "Save changes",
+  "@saveChanges": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "openCamera": "Open camera",
+  "@openCamera": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "openGallery": "Open gallery",
+  "@openGallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noChanges": "There are no changes",
+  "@noChanges": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendFirstMessage": "Be the one to send the first message!",
+  "@sendFirstMessage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "Message",
+  "@message": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "askForHelp": "Ask for help",
+  "@askForHelp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "offerYourHelp": "Offer your help",
+  "@offerYourHelp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "title": "Title",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleError": "The title field can not be empty",
+  "@titleError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "description": "Description",
+  "@description": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionError": "The description field can not be empty",
+  "@descriptionError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "location": "Location",
+  "@location": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "publish": "Publish",
+  "@publish": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myProfile": "My profile",
+  "@myProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "zoomTooFar": "{howMany,plural, =0{You have zoomed out too far. There are no points in this region.}=1{You have zoomed out too far. Zoom in to see {howMany} point.}other{You have zoomed out too far. Zoom in to see {howMany} points.}}",
+  "@zoomTooFar": {
+    "type": "text",
+    "placeholders": {
+      "howMany": {}
+    }
+  },
+  "noMessages": "You haven't received a message yet",
+  "@noMessages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showQ": "Show?",
+  "@showQ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logOut": "Log out",
+  "@logOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "information": "Information",
+  "@information": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "close": "Close",
+  "@close": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendMessage": "Send message",
+  "@sendMessage": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

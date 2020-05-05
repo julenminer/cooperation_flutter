@@ -1,4 +1,5 @@
 import 'package:cooperation/BL/points_bl.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,7 +14,6 @@ class _OfferGUIState extends State<OfferGUI> {
   Set<Marker> _markers;
   GoogleMapController _mapController;
   CameraPosition _initialCameraPosition;
-  LatLng _lastCenter;
   int _frameCount;
   bool _loaded;
   bool _visibility;
@@ -50,7 +50,6 @@ class _OfferGUIState extends State<OfferGUI> {
                   _mapController = controller;
                 },
                 onCameraMove: (position) {
-                  _lastCenter = position.target;
                   _frameCount++;
                   if (_frameCount % 10 == 9) {
                     _frameCount = 0;
@@ -73,7 +72,7 @@ class _OfferGUIState extends State<OfferGUI> {
                 color: Colors.black,
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Text("Te has alejado demasiado.\nHaz zoom para ver " + _count.toString() + " puntos.", style: TextStyle(color: Colors.white),),
+                  child: Text(AppLocalizations().zoomTooFar(_count), style: TextStyle(color: Colors.white),),
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/user_bl.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -46,7 +47,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
             brightness: Brightness.light,
             iconTheme: IconThemeData(color: Colors.black),
             title: Text(
-              "Editar perfil",
+              AppLocalizations().editProfile,
               style: TextStyle(color: Colors.black),
             ),
             backgroundColor: Colors.transparent,
@@ -78,7 +79,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                             height: 8,
                           ),
                           OutlineButton(
-                            child: Text("Editar imagen"),
+                            child: Text(AppLocalizations().editImage),
                             onPressed: _getImage,
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0)),
@@ -87,7 +88,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                             height: 16,
                           ),
                           TextField(
-                            decoration: InputDecoration(labelText: "Nombre"),
+                            decoration: InputDecoration(labelText: AppLocalizations().name),
                             controller: _controller,
                             onChanged: (value) {
                               _name = value;
@@ -112,7 +113,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                       child: _loading
                           ? LinearProgressIndicator()
                           : Text(
-                              "Guardar cambios",
+                              AppLocalizations().saveChanges,
                               style: TextStyle(fontSize: 18),
                             ),
                     ),
@@ -130,28 +131,28 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
   void _getImage() {
     if (Platform.isIOS || Platform.isMacOS) {
       var actions = CupertinoActionSheet(
-        title: Text("Seleccionar imagen"),
+        title: Text(AppLocalizations().editImage),
         actions: <Widget>[
           CupertinoActionSheetAction(
             onPressed: () {
               _getImageCamera();
               Navigator.pop(context, "Camera");
             },
-            child: Text("Abrir cámara"),
+            child: Text(AppLocalizations().openCamera),
           ),
           CupertinoActionSheetAction(
             onPressed: () {
               _getImageGallery();
               Navigator.pop(context, "Gallery");
             },
-            child: Text("Abrir galería"),
+            child: Text(AppLocalizations().openGallery),
           )
         ],
         cancelButton: CupertinoActionSheetAction(
           onPressed: () {
             Navigator.pop(context, "Cancel");
           },
-          child: Text("Cancelar"),
+          child: Text(AppLocalizations().cancel),
         ),
       );
 
@@ -166,14 +167,14 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.camera_alt),
-                      title: new Text("Abrir cámara"),
+                      title: new Text(AppLocalizations().openCamera),
                       onTap: () {
                         _getImageCamera();
                         Navigator.pop(context, "Camera");
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo),
-                    title: new Text("Abrir galería"),
+                    title: new Text(AppLocalizations().openGallery),
                     onTap: () {
                       _getImageGallery();
                       Navigator.pop(context, "Gallery");
@@ -208,7 +209,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (!_localImage && _name == UserBL.getName()) {
       final snackBar = SnackBar(
-        content: Text("No has realizado cambios"),
+        content: Text(AppLocalizations().noChanges),
       );
       _scaffoldKey.currentState.showSnackBar(snackBar);
     } else {

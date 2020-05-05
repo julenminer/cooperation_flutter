@@ -6,6 +6,7 @@ import 'package:cooperation/BL/authentication_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/edit_profile_gui.dart';
 import 'package:cooperation/GUI/log_in_gui.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 
 class ProfileGUI extends StatefulWidget {
@@ -99,7 +100,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                     });
                   },
                   child: Text(
-                    "Editar perfil",
+                    AppLocalizations().editProfile,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -122,7 +123,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                     );
                   },
                   child: Text(
-                    "Cerrar sesión",
+                    AppLocalizations().logOut,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

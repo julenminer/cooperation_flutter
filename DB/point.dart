@@ -2,6 +2,7 @@ import 'package:cache_image/cache_image.dart';
 import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -64,7 +65,7 @@ class Point {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Center(child: Text("Información")),
+                      Center(child: Text(AppLocalizations().information)),
                       SizedBox(
                         height: 8,
                       ),
@@ -131,7 +132,7 @@ class Point {
                                       new BorderRadius.circular(30.0)),
                               onPressed: () => Navigator.pop(context),
                               child: Text(
-                                "Cerrar",
+                                AppLocalizations().close,
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -163,7 +164,7 @@ class Point {
                                           ));
                                     },
                               child: Text(
-                                "Enviar mensaje",
+                                AppLocalizations().sendMessage,
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),

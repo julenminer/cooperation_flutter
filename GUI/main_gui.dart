@@ -4,6 +4,7 @@ import 'package:cooperation/GUI/add_point_gui.dart';
 import 'package:cooperation/GUI/main_pages/chats_list_gui.dart';
 import 'package:cooperation/GUI/main_pages/help_gui.dart';
 import 'package:cooperation/GUI/main_pages/offer_gui.dart';
+import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,6 @@ class _MainGUIState extends State<MainGUI> {
         IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
     });
   }
 
@@ -181,16 +181,16 @@ class _MainGUIState extends State<MainGUI> {
   String _getTitle(int index) {
     switch (index) {
       case 0:
-        return "Ayuda";
+        return AppLocalizations().help;
         break;
       case 1:
-        return "Oferta de ayuda";
+        return AppLocalizations().helpOffer;
         break;
       case 2:
-        return "Chat";
+        return AppLocalizations().chat;
         break;
       case 3:
-        return "Perfil";
+        return AppLocalizations().profile;
         break;
     }
     return null;
