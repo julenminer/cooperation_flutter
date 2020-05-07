@@ -17,10 +17,8 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool themeMode = (prefs.getBool('themeMode') ?? false);
   String languageCode = (prefs.getString('languageCode') ?? 'en');
-  String countryCode = (prefs.getString('countryCode') ?? 'US');
   prefs.setBool('themeMode', themeMode);
   prefs.setString('languageCode', languageCode);
-  prefs.setString('countryCode', countryCode);
   final Auth auth = new Auth();
   FirebaseUser firebaseUser = await auth.getCurrentUser();
   if (firebaseUser != null) {
@@ -29,23 +27,18 @@ void main() async {
   runApp(new MyApp(
     themeMode: themeMode,
     languageCode: languageCode,
-    countryCode: countryCode,
-  ));}
+  ));
+}
 
 class MyApp extends StatefulWidget {
-  MyApp(
-      {@required this.themeMode,
-        @required this.languageCode,
-        @required this.countryCode})
-      : assert(
-  themeMode != null && languageCode != null && countryCode != null);
+  MyApp({@required this.themeMode, @required this.languageCode})
+      : assert(themeMode != null && languageCode != null);
   bool themeMode;
   String languageCode;
-  String countryCode;
 
   static void changeTheme(BuildContext context) {
     _MyAppState state = context.ancestorStateOfType(TypeMatcher<_MyAppState>());
-    if(state != null) {
+    if (state != null) {
       state.setState(() {
         state._themeMode = !state._themeMode;
       });
@@ -58,7 +51,7 @@ class MyApp extends StatefulWidget {
   static void changeLocale(
       BuildContext context, String languageCode, String countryCode) {
     _MyAppState state = context.ancestorStateOfType(TypeMatcher<_MyAppState>());
-    if(state != null) {
+    if (state != null) {
       state.setState(() {
         state._languageCode = languageCode;
         state._countryCode = countryCode;
@@ -85,7 +78,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _themeMode = widget.themeMode;
     _languageCode = widget.languageCode;
-    _countryCode = widget.countryCode;
   }
 
   @override
@@ -113,7 +105,7 @@ class _MyAppState extends State<MyApp> {
           const Locale('es'), // Spanish
           // ... other locales the app supports
         ],
-        locale: Locale('es'),
+        //locale: Locale('es'),
         debugShowCheckedModeBanner: false,
         theme: _getTheme(_themeMode),
         home: home);
@@ -124,6 +116,15 @@ class _MyAppState extends State<MyApp> {
       return ThemeData(
         primarySwatch: Colors.blue,
         brightness: Brightness.dark,
+        backgroundColor: Colors.black,
+        textTheme: TextTheme(
+          headline6: Theme.of(context).textTheme.headline6.copyWith(
+              color: Colors.white,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1),
+          bodyText1: TextStyle(color: Colors.white),
+        ),
       );
     } else {
       return ThemeData(
@@ -132,10 +133,10 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.white,
         textTheme: TextTheme(
           headline6: Theme.of(context).textTheme.headline6.copyWith(
-            color: Colors.black,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1),
+              color: Colors.black,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1),
           bodyText1: TextStyle(color: Colors.black),
         ),
         buttonColor: Colors.blue[400],

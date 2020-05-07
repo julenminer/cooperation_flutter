@@ -157,6 +157,14 @@ class AppLocalizations {
   String get sendMessage { // "Enviar mensaje"
     return Intl.message('Send message', name: 'sendMessage');
   }
+
+  String get changeLightDarkMode { // "Cambiar modo día/noche"
+    return Intl.message('Change light/dark mode', name: 'changeLightDarkMode');
+  }
+
+  String get changeLanguage { // "Cambiar idioma"
+    return Intl.message('Change language', name: 'changeLanguage');
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

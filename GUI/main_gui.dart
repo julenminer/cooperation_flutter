@@ -92,7 +92,7 @@ class _MainGUIState extends State<MainGUI> {
       },
       child: Scaffold(
         appBar: AppBar(
-          brightness: Brightness.light,
+          brightness: Theme.of(context).brightness,
           centerTitle: false,
           automaticallyImplyLeading: false,
           actions: _currentIndex < 2
@@ -115,7 +115,7 @@ class _MainGUIState extends State<MainGUI> {
                             }
                       });
                     },
-                    color: Colors.black,
+                    color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
                   ),
                   SizedBox(
                     width: 8,
@@ -125,7 +125,7 @@ class _MainGUIState extends State<MainGUI> {
           title: Text(
             _title,
             style: TextStyle(
-                fontSize: 26, color: Colors.black, fontWeight: FontWeight.bold),
+                fontSize: 26, color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -133,8 +133,8 @@ class _MainGUIState extends State<MainGUI> {
         backgroundColor: Theme.of(context).backgroundColor,
         body: _body,
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black54,
-          unselectedItemColor: Colors.black26,
+          selectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black45 : Colors.white,
+          unselectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black26 : Colors.grey[500],
           items: _bottomItems(),
           currentIndex: _currentIndex,
           onTap: _onTabSelected,

@@ -7,6 +7,7 @@ import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/edit_profile_gui.dart';
 import 'package:cooperation/GUI/log_in_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
+import 'package:cooperation/main.dart';
 import 'package:flutter/material.dart';
 
 class ProfileGUI extends StatefulWidget {
@@ -17,7 +18,7 @@ class ProfileGUI extends StatefulWidget {
 class _ProfileGUIState extends State<ProfileGUI> {
   String _photoUrl;
   String _name;
-  
+
   @override
   void initState() {
     super.initState();
@@ -65,6 +66,62 @@ class _ProfileGUIState extends State<ProfileGUI> {
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Divider(),
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: OutlineButton(
+                          borderSide: BorderSide(
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black26
+                                    : Colors.white, //Color of the border
+                            style: BorderStyle.solid, //Style of the border
+                            width: 1, //width of the border
+                          ),
+                          highlightColor: Colors.blue[100],
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          onPressed: () {
+                            MyApp.changeTheme(context);
+                          },
+                          child: Text(
+                            AppLocalizations().changeLightDarkMode,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: OutlineButton(
+                          borderSide: BorderSide(
+                            color:
+                            Theme.of(context).brightness == Brightness.light
+                                ? Colors.black26
+                                : Colors.white, //Color of the border
+                            style: BorderStyle.solid, //Style of the border
+                            width: 1, //width of the border
+                          ),
+                          highlightColor: Colors.blue[100],
+                          shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          onPressed: () {
+                            //MyApp.changeTheme(context);
+                          },
+                          child: Text(
+                            AppLocalizations().changeLanguage,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -77,6 +134,13 @@ class _ProfileGUIState extends State<ProfileGUI> {
             children: <Widget>[
               Expanded(
                 child: OutlineButton(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black26
+                        : Colors.white, //Color of the border
+                    style: BorderStyle.solid, //Style of the border
+                    width: 1, //width of the border
+                  ),
                   highlightColor: Colors.blue[100],
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),
@@ -87,9 +151,9 @@ class _ProfileGUIState extends State<ProfileGUI> {
                         builder: (context) => EditProfileGUI(),
                       ),
                     ).then((value) {
-                      if(value != null && value) {
+                      if (value != null && value) {
                         UserBL.updateCurrentUser().then((value) {
-                          if(mounted) {
+                          if (mounted) {
                             setState(() {
                               _photoUrl = UserBL.getPhotoUrl();
                               _name = UserBL.getName();
@@ -110,6 +174,13 @@ class _ProfileGUIState extends State<ProfileGUI> {
               ),
               Expanded(
                 child: OutlineButton(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black26
+                        : Colors.white, //Color of the border
+                    style: BorderStyle.solid, //Style of the border
+                    width: 1, //width of the border
+                  ),
                   highlightColor: Colors.blue[100],
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),

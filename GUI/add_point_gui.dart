@@ -46,13 +46,13 @@ class _AddPointGUIState extends State<AddPointGUI> {
         child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            brightness: Brightness.light,
-            iconTheme: IconThemeData(color: Colors.black),
+            brightness: Theme.of(context).brightness,
+            iconTheme: IconThemeData(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             title: Text(
               widget.pointType == PointType.help
                   ? AppLocalizations().askForHelp
                   : AppLocalizations().offerYourHelp,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
