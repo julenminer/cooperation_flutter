@@ -1,6 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cooperation/BL/notifications_bl.dart';
+import 'package:cooperation/BL/chat_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,7 +32,7 @@ class _ChatGUIState extends State<ChatGUI> {
 
   Future<void> _checkIfConversationExists() async {
     var conversationId =
-        await FirebaseBL.getConversationId(UserBL.getUid(), widget.toUid);
+        await ChatBL.getConversationId(UserBL.getUid(), widget.toUid);
     if (conversationId != null) {
       if (mounted) {
         setState(() {
@@ -180,7 +180,7 @@ class _ChatGUIState extends State<ChatGUI> {
           });
         }
       } else {
-        await FirebaseBL.sendMessage(text, _conversationIdState, widget.toUid);
+        await ChatBL.sendMessage(text, _conversationIdState, widget.toUid);
       }
     }
   }

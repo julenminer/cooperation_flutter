@@ -1,5 +1,5 @@
 import 'package:cache_image/cache_image.dart';
-import 'package:cooperation/BL/notifications_bl.dart';
+import 'package:cooperation/BL/chat_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';

@@ -3,7 +3,7 @@ import 'package:cooperation/DB/firebase_db.dart';
 
 import 'package:http/http.dart' as http;
 
-class FirebaseBL {
+class ChatBL {
 
 
   static Future<void> sendMessage(String message, String conversationId, String toUid) async {
