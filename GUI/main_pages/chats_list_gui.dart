@@ -1,5 +1,4 @@
 import 'package:cache_image/cache_image.dart';
-import 'package:cooperation/BL/firebase_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
@@ -83,7 +82,7 @@ class ChatListItem extends StatelessWidget {
                   height: 60,
                   child: Image(
                     fit: BoxFit.fill,
-                    image: CacheImage(FirebaseBL.getUserPhotoUrl(document.data['toUid'])),
+                    image: CacheImage(UserBL.getUserPhotoUrl(document.data['toUid'])),
                   ),
                 ),
               ),

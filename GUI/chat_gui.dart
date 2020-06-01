@@ -1,6 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cooperation/BL/firebase_bl.dart';
+import 'package:cooperation/BL/notifications_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
@@ -173,7 +173,7 @@ class _ChatGUIState extends State<ChatGUI> {
       _controller.clear();
       if (_conversationIdState == null) {
         var newConversationId =
-            await FirebaseBL.createConversation(widget.toUid, text);
+            await UserBL.createConversation(widget.toUid, text);
         if (mounted) {
           setState(() {
             _conversationIdState = newConversationId;

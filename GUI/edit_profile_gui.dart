@@ -44,11 +44,11 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
           key: _scaffoldKey,
           backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            brightness: Brightness.light,
-            iconTheme: IconThemeData(color: Colors.black),
+            brightness: Theme.of(context).brightness,
+            iconTheme: IconThemeData(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             title: Text(
               AppLocalizations().editProfile,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -79,6 +79,14 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                             height: 8,
                           ),
                           OutlineButton(
+                            borderSide: BorderSide(
+                              color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black26
+                                  : Colors.white, //Color of the border
+                              style: BorderStyle.solid, //Style of the border
+                              width: 1, //width of the border
+                            ),
                             child: Text(AppLocalizations().editImage),
                             onPressed: _getImage,
                             shape: new RoundedRectangleBorder(

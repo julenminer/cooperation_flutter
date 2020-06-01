@@ -49,17 +49,15 @@ class MyApp extends StatefulWidget {
   }
 
   static void changeLocale(
-      BuildContext context, String languageCode, String countryCode) {
+      BuildContext context, String languageCode) {
     _MyAppState state = context.ancestorStateOfType(TypeMatcher<_MyAppState>());
     if (state != null) {
       state.setState(() {
         state._languageCode = languageCode;
-        state._countryCode = countryCode;
       });
     }
     SharedPreferences.getInstance().then((prefs) {
       prefs.setString('languageCode', state._languageCode);
-      prefs.setString('countryCode', state._countryCode);
     });
   }
 
@@ -71,7 +69,6 @@ class _MyAppState extends State<MyApp> {
   /// false = light, true = dark
   bool _themeMode;
   String _languageCode;
-  String _countryCode;
 
   @override
   initState() {
@@ -105,9 +102,10 @@ class _MyAppState extends State<MyApp> {
           const Locale('es'), // Spanish
           // ... other locales the app supports
         ],
-        //locale: Locale('es'),
+        locale: Locale(_languageCode),
         debugShowCheckedModeBanner: false,
-        theme: _getTheme(_themeMode),
+        theme: _getTheme(_themeMode).copyWith(
+        ),
         home: home);
   }
 

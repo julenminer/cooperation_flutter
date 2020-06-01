@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cooperation/BL/firebase_bl.dart';
+import 'package:cooperation/BL/notifications_bl.dart';
 import 'package:cooperation/DB/firebase_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -40,7 +40,7 @@ class UserBL {
 
   static String getPhotoUrl() {
     assert(_user != null);
-    return FirebaseBL.getUserPhotoUrl(getUid());
+    return getUserPhotoUrl(getUid());
   }
 
   static String getEmail() {
@@ -57,5 +57,17 @@ class UserBL {
   static void signOut() {
     _user = null;
     _name = null;
+  }
+
+  static String getUserPhotoUrl(String uid) {
+    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + "_100x100.png";
+  }
+
+  static String getUserOriginalPhotoUrl(String uid) {
+    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + ".png";
+  }
+
+  static Future<String> createConversation(String toUid, String message) async {
+    return await FirebaseDB.createConversation(toUid, UserBL.getUid(), UserBL.getName(), message);
   }
 }

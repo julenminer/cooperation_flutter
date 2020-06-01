@@ -7,6 +7,7 @@ import 'package:cooperation/GUI/main_pages/offer_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flushbar/flushbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -33,7 +34,9 @@ class _MainGUIState extends State<MainGUI> {
     _currentIndex = 0;
     _body = _getBody(_currentIndex);
     _title = _getTitle(_currentIndex);
-    firebaseCloudMessaging_Listeners();
+    if(!kIsWeb) {
+      firebaseCloudMessaging_Listeners();
+    }
   }
 
   void iOS_Permission() {
@@ -131,8 +134,39 @@ class _MainGUIState extends State<MainGUI> {
           elevation: 0,
         ),
         backgroundColor: Theme.of(context).backgroundColor,
-        body: _body,
-        bottomNavigationBar: BottomNavigationBar(
+        body: kIsWeb ? Row(
+          children: <Widget>[
+            NavigationRail(
+              selectedIndex: _currentIndex,
+              onDestinationSelected: _onTabSelected,
+              labelType: NavigationRailLabelType.selected,
+              destinations: [
+                NavigationRailDestination(
+                  icon: Icon(Icons.help),
+                  label: Text(_getTitle(0)),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.pan_tool),
+                  label: Text(_getTitle(1)),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.message),
+                  label: Text(_getTitle(2)),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.person),
+                  label: Text(_getTitle(3)),
+                ),
+              ],
+            ),
+            VerticalDivider(thickness: 1, width: 1),
+            // This is the main content.
+            Expanded(
+              child: _body,
+            )
+          ],
+        ) : _body,
+        bottomNavigationBar: kIsWeb ? null : BottomNavigationBar(
           selectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black45 : Colors.white,
           unselectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black26 : Colors.grey[500],
           items: _bottomItems(),

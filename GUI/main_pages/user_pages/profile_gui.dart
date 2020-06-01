@@ -9,6 +9,7 @@ import 'package:cooperation/GUI/log_in_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:cooperation/main.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileGUI extends StatefulWidget {
   @override
@@ -103,9 +104,9 @@ class _ProfileGUIState extends State<ProfileGUI> {
                         child: OutlineButton(
                           borderSide: BorderSide(
                             color:
-                            Theme.of(context).brightness == Brightness.light
-                                ? Colors.black26
-                                : Colors.white, //Color of the border
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black26
+                                    : Colors.white, //Color of the border
                             style: BorderStyle.solid, //Style of the border
                             width: 1, //width of the border
                           ),
@@ -113,7 +114,33 @@ class _ProfileGUIState extends State<ProfileGUI> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0)),
                           onPressed: () {
-                            //MyApp.changeTheme(context);
+                            SharedPreferences.getInstance().then((prefs) {
+                              String languageCode =
+                                  prefs.getString('languageCode');
+                              showDialog(
+                                context: context,
+                                builder: (context) => Dialog(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      RadioListTile(value: 'en', groupValue: languageCode, onChanged: changeLang, title: Text("English"),),
+                                      RadioListTile(value: 'es', groupValue: languageCode, onChanged: changeLang, title: Text("Español"),),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: FlatButton(
+                                          child: new Text(AppLocalizations().cancel),
+                                          textColor: Theme.of(context).accentColor,
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+
                           },
                           child: Text(
                             AppLocalizations().changeLanguage,
@@ -204,5 +231,10 @@ class _ProfileGUIState extends State<ProfileGUI> {
         ],
       ),
     );
+  }
+
+  void changeLang(value) {
+    MyApp.changeLocale(context, value);
+    Navigator.of(context).pop();
   }
 }

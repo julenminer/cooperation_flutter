@@ -4,16 +4,7 @@ import 'package:cooperation/DB/firebase_db.dart';
 import 'package:http/http.dart' as http;
 
 class FirebaseBL {
-  static String getUserPhotoUrl(String uid) {
-    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + "_100x100.png";
-  }
 
-  static String getUserOriginalPhotoUrl(String uid) {
-    return "gs://tfmapp-a3d38.appspot.com/userImages/" + uid + ".png";
-  }
-  static Future<String> createConversation(String toUid, String message) async {
-    return await FirebaseDB.createConversation(toUid, UserBL.getUid(), UserBL.getName(), message);
-  }
 
   static Future<void> sendMessage(String message, String conversationId, String toUid) async {
     await FirebaseDB.sendMessage(UserBL.getUid(), message, DateTime.now(), conversationId, true);
