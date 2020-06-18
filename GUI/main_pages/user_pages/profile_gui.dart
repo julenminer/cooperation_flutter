@@ -45,7 +45,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                         borderRadius: BorderRadius.circular(200),
                         child: Image(
                           fit: BoxFit.fill,
-                          image: CacheImage(UserBL.getPhotoUrl()),
+                          image: CacheImage(_photoUrl),
                         ),
                       ),
                     ),
@@ -53,7 +53,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                       height: 16,
                     ),
                     Text(
-                      UserBL.getName(),
+                      _name,
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       maxLines: 2,
