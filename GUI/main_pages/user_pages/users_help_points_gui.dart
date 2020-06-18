@@ -8,12 +8,7 @@ import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UsersHelpPointsGUI extends StatefulWidget {
-  @override
-  _UsersHelpPointsGUIState createState() => _UsersHelpPointsGUIState();
-}
-
-class _UsersHelpPointsGUIState extends State<UsersHelpPointsGUI> {
+class UsersHelpPointsGUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -57,16 +52,16 @@ class ListItem extends StatefulWidget {
 
 class _ListItemState extends State<ListItem> {
   bool _isChecked;
-  bool isAppleDevice;
+  bool _isAppleDevice;
 
   @override
   void initState() {
     super.initState();
     try {
-      isAppleDevice = Platform.isIOS || Platform.isMacOS;
+      _isAppleDevice = Platform.isIOS || Platform.isMacOS;
     }
     on Exception {
-      isAppleDevice = false;
+      _isAppleDevice = false;
     }
     _isChecked = widget.point.show;
   }
@@ -94,7 +89,7 @@ class _ListItemState extends State<ListItem> {
           Column(
             children: <Widget>[
               Text(AppLocalizations.of(context).showQ),
-              (isAppleDevice)
+              (_isAppleDevice)
                   ? CupertinoSwitch(
                       value: _isChecked,
                       onChanged: _changeShow,
