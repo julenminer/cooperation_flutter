@@ -13,32 +13,32 @@ class UserGUI extends StatefulWidget {
 }
 
 class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
-  List<Widget> childWidgets = [
+  List<Widget> _childWidgets = [
     UsersHelpPointsGUI(),
     UsersOfferPointsGUI(),
     ProfileGUI()
   ];
-  bool isAppleDevice;
+  bool _isAppleDevice;
 
   //The Widgets that has to be loaded when a tab is selected.
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
 
   TabController _tabController;
   @override
   void initState() {
     super.initState();
     try {
-      isAppleDevice = Platform.isIOS || Platform.isMacOS;
+      _isAppleDevice = Platform.isIOS || Platform.isMacOS;
     }
     on Exception {
-      isAppleDevice = false;
+      _isAppleDevice = false;
     }
     _tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isAppleDevice) {
+    if (_isAppleDevice) {
       return Container(
         child: SizedBox.expand(
           child: Column(
@@ -51,7 +51,7 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                     onValueChanged: (value) {
                       if (mounted) {
                         setState(() {
-                          selectedIndex = value;
+                          _selectedIndex = value;
                         });
                       }
                     },
@@ -60,7 +60,7 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                       1: Text(AppLocalizations.of(context).offerYourHelp),
                       2: Text(AppLocalizations.of(context).myProfile),
                     },
-                    groupValue: selectedIndex,
+                    groupValue: _selectedIndex,
                   ),
                 ),
               ),
@@ -94,7 +94,7 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: childWidgets,
+                  children: _childWidgets,
                 ),
               )
             ],
@@ -104,5 +104,5 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
     }
   }
 
-  Widget getChildWidget() => childWidgets[selectedIndex];
+  Widget getChildWidget() => _childWidgets[_selectedIndex];
 }
