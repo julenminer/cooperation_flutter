@@ -123,8 +123,8 @@ class _ProfileGUIState extends State<ProfileGUI> {
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
-                                      RadioListTile(value: 'en', groupValue: languageCode, onChanged: changeLang, title: Text("English"),),
-                                      RadioListTile(value: 'es', groupValue: languageCode, onChanged: changeLang, title: Text("Español"),),
+                                      RadioListTile(value: 'en', groupValue: languageCode, onChanged: _changeLang, title: Text("English"),),
+                                      RadioListTile(value: 'es', groupValue: languageCode, onChanged: _changeLang, title: Text("Español"),),
                                       Align(
                                         alignment: Alignment.centerRight,
                                         child: FlatButton(
@@ -233,7 +233,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
     );
   }
 
-  void changeLang(value) {
+  void _changeLang(value) {
     MyApp.changeLocale(context, value);
     Navigator.of(context).pop();
   }
