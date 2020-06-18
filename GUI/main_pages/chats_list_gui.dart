@@ -6,12 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatsListGUI extends StatefulWidget {
-  @override
-  _ChatsListGUIState createState() => _ChatsListGUIState();
-}
-
-class _ChatsListGUIState extends State<ChatsListGUI> {
+class ChatsListGUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
