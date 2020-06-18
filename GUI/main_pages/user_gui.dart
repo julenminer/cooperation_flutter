@@ -64,7 +64,7 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              Expanded(child: getChildWidget()),
+              Expanded(child: _getChildWidget()),
             ],
           ),
         ),
@@ -104,5 +104,5 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
     }
   }
 
-  Widget getChildWidget() => _childWidgets[_selectedIndex];
+  Widget _getChildWidget() => _childWidgets[_selectedIndex];
 }
