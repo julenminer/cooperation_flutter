@@ -15,7 +15,7 @@ class UserGUI extends StatefulWidget {
 class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
   List<Widget> childWidgets = [
     UsersHelpPointsGUI(),
-    UsersOfferPoints(),
+    UsersOfferPointsGUI(),
     ProfileGUI()
   ];
   bool isAppleDevice;

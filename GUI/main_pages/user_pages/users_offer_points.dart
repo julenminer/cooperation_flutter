@@ -8,12 +8,12 @@ import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UsersOfferPoints extends StatefulWidget {
+class UsersOfferPointsGUI extends StatefulWidget {
   @override
-  _UsersOfferPointsState createState() => _UsersOfferPointsState();
+  _UsersOfferPointsGUIState createState() => _UsersOfferPointsGUIState();
 }
 
-class _UsersOfferPointsState extends State<UsersOfferPoints> {
+class _UsersOfferPointsGUIState extends State<UsersOfferPointsGUI> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
