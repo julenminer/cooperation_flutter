@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cooperation/BL/chat_bl.dart';
 import 'package:cooperation/DB/firebase_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
