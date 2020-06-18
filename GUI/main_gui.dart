@@ -19,10 +19,6 @@ class MainGUI extends StatefulWidget {
 }
 
 class _MainGUIState extends State<MainGUI> {
-  String _title;
-
-  Widget _body;
-
   int _currentIndex;
 
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -32,8 +28,6 @@ class _MainGUIState extends State<MainGUI> {
   void initState() {
     super.initState();
     _currentIndex = 0;
-    _body = _getBody(_currentIndex);
-    _title = _getTitle(_currentIndex);
     if(!kIsWeb) {
       firebaseCloudMessaging_Listeners();
     }
@@ -64,7 +58,7 @@ class _MainGUIState extends State<MainGUI> {
                 color: Colors.white,
               ),
               onPressed: () {
-                _onTabSelected(2);
+                _onTabSelected(2, context);
               }),
           backgroundColor: Colors.red,
           boxShadows: [
@@ -78,10 +72,10 @@ class _MainGUIState extends State<MainGUI> {
         print('on message $message');
       },
       onResume: (Map<String, dynamic> message) async {
-        _onTabSelected(2);
+        _onTabSelected(2, context);
       },
       onLaunch: (Map<String, dynamic> message) async {
-        _onTabSelected(2);
+        _onTabSelected(2, context);
       },
     );
   }
@@ -113,7 +107,7 @@ class _MainGUIState extends State<MainGUI> {
                           )).then((value) {
                             if(value != null && value) {
                               if(mounted) {
-                                _onTabSelected(_currentIndex);
+                                _onTabSelected(_currentIndex, context);
                               }
                             }
                       });
@@ -126,7 +120,7 @@ class _MainGUIState extends State<MainGUI> {
                 ]
               : <Widget>[],
           title: Text(
-            _title,
+            _getTitle(_currentIndex, context),
             style: TextStyle(
                 fontSize: 26, color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
           ),
@@ -138,93 +132,91 @@ class _MainGUIState extends State<MainGUI> {
           children: <Widget>[
             NavigationRail(
               selectedIndex: _currentIndex,
-              onDestinationSelected: _onTabSelected,
+              onDestinationSelected: (val) => _onTabSelected(val, context),
               labelType: NavigationRailLabelType.selected,
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.help),
-                  label: Text(_getTitle(0)),
+                  label: Text(_getTitle(0, context)),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.pan_tool),
-                  label: Text(_getTitle(1)),
+                  label: Text(_getTitle(1, context)),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.message),
-                  label: Text(_getTitle(2)),
+                  label: Text(_getTitle(2, context)),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.person),
-                  label: Text(_getTitle(3)),
+                  label: Text(_getTitle(3, context)),
                 ),
               ],
             ),
             VerticalDivider(thickness: 1, width: 1),
             // This is the main content.
             Expanded(
-              child: _body,
+              child: _getBody(_currentIndex),
             )
           ],
-        ) : _body,
+        ) : _getBody(_currentIndex),
         bottomNavigationBar: kIsWeb ? null : BottomNavigationBar(
           selectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black45 : Colors.white,
           unselectedItemColor: Theme.of(context).brightness == Brightness.light ? Colors.black26 : Colors.grey[500],
-          items: _bottomItems(),
+          items: _bottomItems(context),
           currentIndex: _currentIndex,
-          onTap: _onTabSelected,
+          onTap: (val) => _onTabSelected(val, context),
         ),
       ),
     );
   }
 
   /// Given an [index], sets the state of the navigation page.
-  void _onTabSelected(int index) {
+  void _onTabSelected(int index, BuildContext context) {
     if(mounted){
       setState(() {
-        _body = _getBody(index);
-        _title = _getTitle(index);
         _currentIndex = index;
       });
     }
   }
 
   /// Returns the items for the bottom navigation bar.
-  List<BottomNavigationBarItem> _bottomItems() {
+  List<BottomNavigationBarItem> _bottomItems(BuildContext context) {
     var list = [
       BottomNavigationBarItem(
         icon: Icon(Icons.help),
-        title: Text(_getTitle(0)),
+        title: Text(_getTitle(0, context)),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.pan_tool),
-        title: Text(_getTitle(1)),
+        title: Text(_getTitle(1, context)),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.message),
-        title: Text(_getTitle(2)),
+        title: Text(_getTitle(2, context)),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.person),
-        title: Text(_getTitle(3)),
+        title: Text(_getTitle(3, context)),
       ),
     ];
     return list;
   }
 
   /// Given an [index], returns the name of the title.
-  String _getTitle(int index) {
+  String _getTitle(int index, BuildContext context) {
     switch (index) {
       case 0:
-        return AppLocalizations().help;
+        return AppLocalizations.of(context).help;
         break;
       case 1:
-        return AppLocalizations().helpOffer;
+        return AppLocalizations.of(context).helpOffer;
         break;
       case 2:
-        return AppLocalizations().chat;
+        return AppLocalizations.of(context).chat;
         break;
       case 3:
-        return AppLocalizations().profile;
+        return AppLocalizations.of(context).profile;
         break;
     }
     return null;

@@ -56,9 +56,9 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                       }
                     },
                     children: {
-                      0: Text(AppLocalizations().askForHelp),
-                      1: Text(AppLocalizations().offerYourHelp),
-                      2: Text(AppLocalizations().myProfile),
+                      0: Text(AppLocalizations.of(context).askForHelp),
+                      1: Text(AppLocalizations.of(context).offerYourHelp),
+                      2: Text(AppLocalizations.of(context).myProfile),
                     },
                     groupValue: selectedIndex,
                   ),
@@ -81,13 +81,13 @@ class _UserGUIState extends State<UserGUI> with SingleTickerProviderStateMixin {
                 unselectedLabelColor: Colors.black54,
                 tabs: [
                   Tab(
-                    text: AppLocalizations().askForHelp,
+                    text: AppLocalizations.of(context).askForHelp,
                   ),
                   Tab(
-                    text: AppLocalizations().offerYourHelp,
+                    text: AppLocalizations.of(context).offerYourHelp,
                   ),
                   Tab(
-                    text: AppLocalizations().myProfile,
+                    text: AppLocalizations.of(context).myProfile,
                   ),
                 ],
               ),

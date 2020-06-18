@@ -72,7 +72,7 @@ class _OfferGUIState extends State<OfferGUI> {
                 color: Colors.black,
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Text(AppLocalizations().zoomTooFar(_count), style: TextStyle(color: Colors.white),),
+                  child: Text(AppLocalizations.of(context).zoomTooFar(_count), style: TextStyle(color: Colors.white),),
                 ),
               ),
             ),

@@ -47,7 +47,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
             brightness: Theme.of(context).brightness,
             iconTheme: IconThemeData(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             title: Text(
-              AppLocalizations().editProfile,
+              AppLocalizations.of(context).editProfile,
               style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             ),
             backgroundColor: Colors.transparent,
@@ -87,7 +87,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                               style: BorderStyle.solid, //Style of the border
                               width: 1, //width of the border
                             ),
-                            child: Text(AppLocalizations().editImage),
+                            child: Text(AppLocalizations.of(context).editImage),
                             onPressed: _getImage,
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(30.0)),
@@ -96,7 +96,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                             height: 16,
                           ),
                           TextField(
-                            decoration: InputDecoration(labelText: AppLocalizations().name),
+                            decoration: InputDecoration(labelText: AppLocalizations.of(context).name),
                             controller: _controller,
                             onChanged: (value) {
                               _name = value;
@@ -121,7 +121,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                       child: _loading
                           ? LinearProgressIndicator()
                           : Text(
-                              AppLocalizations().saveChanges,
+                              AppLocalizations.of(context).saveChanges,
                               style: TextStyle(fontSize: 18),
                             ),
                     ),
@@ -139,28 +139,28 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
   void _getImage() {
     if (Platform.isIOS || Platform.isMacOS) {
       var actions = CupertinoActionSheet(
-        title: Text(AppLocalizations().editImage),
+        title: Text(AppLocalizations.of(context).editImage),
         actions: <Widget>[
           CupertinoActionSheetAction(
             onPressed: () {
               _getImageCamera();
               Navigator.pop(context, "Camera");
             },
-            child: Text(AppLocalizations().openCamera),
+            child: Text(AppLocalizations.of(context).openCamera),
           ),
           CupertinoActionSheetAction(
             onPressed: () {
               _getImageGallery();
               Navigator.pop(context, "Gallery");
             },
-            child: Text(AppLocalizations().openGallery),
+            child: Text(AppLocalizations.of(context).openGallery),
           )
         ],
         cancelButton: CupertinoActionSheetAction(
           onPressed: () {
             Navigator.pop(context, "Cancel");
           },
-          child: Text(AppLocalizations().cancel),
+          child: Text(AppLocalizations.of(context).cancel),
         ),
       );
 
@@ -175,14 +175,14 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.camera_alt),
-                      title: new Text(AppLocalizations().openCamera),
+                      title: new Text(AppLocalizations.of(context).openCamera),
                       onTap: () {
                         _getImageCamera();
                         Navigator.pop(context, "Camera");
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo),
-                    title: new Text(AppLocalizations().openGallery),
+                    title: new Text(AppLocalizations.of(context).openGallery),
                     onTap: () {
                       _getImageGallery();
                       Navigator.pop(context, "Gallery");
@@ -217,7 +217,7 @@ class _EditProfileGUIState extends State<EditProfileGUI> {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (!_localImage && _name == UserBL.getName()) {
       final snackBar = SnackBar(
-        content: Text(AppLocalizations().noChanges),
+        content: Text(AppLocalizations.of(context).noChanges),
       );
       _scaffoldKey.currentState.showSnackBar(snackBar);
     } else {

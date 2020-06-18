@@ -59,7 +59,7 @@ class _LogInGUIState extends State<LogInGUI> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(60, 0, 60, 25.0),
                           child: Text(
-                            AppLocalizations().logInAndStart,
+                            AppLocalizations.of(context).logInAndStart,
                             style: Theme.of(context).textTheme.headline6,
                             textAlign: TextAlign.center,
                           ),
@@ -68,7 +68,7 @@ class _LogInGUIState extends State<LogInGUI> {
                           padding: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                           child: _signUpButton(
                               Image.asset("assets/google-logo.png"),
-                              AppLocalizations().logInGoogle,
+                              AppLocalizations.of(context).logInGoogle,
                               Colors.grey[300],
                               Colors.black,
                               _googleLogin),
@@ -105,7 +105,7 @@ class _LogInGUIState extends State<LogInGUI> {
           });
         }
         final snackBar = SnackBar(
-          content: Text(AppLocalizations().errorLogIn),
+          content: Text(AppLocalizations.of(context).errorLogIn),
         );
         _scaffoldKey.currentState.showSnackBar(snackBar);
       }
@@ -117,7 +117,7 @@ class _LogInGUIState extends State<LogInGUI> {
       }
       if (error.toString() == "Unknown") {
         final snackBar = SnackBar(
-          content: Text(AppLocalizations().errorLogIn),
+          content: Text(AppLocalizations.of(context).errorLogIn),
         );
         _scaffoldKey.currentState.showSnackBar(snackBar);
       }

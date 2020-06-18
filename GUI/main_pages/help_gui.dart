@@ -74,7 +74,7 @@ class _HelpGUIState extends State<HelpGUI> {
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Text(
-                    AppLocalizations().zoomTooFar(_count),
+                    AppLocalizations.of(context).zoomTooFar(_count),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

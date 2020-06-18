@@ -32,7 +32,7 @@ class _ChatsListGUIState extends State<ChatsListGUI> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    AppLocalizations().noMessages,
+                    AppLocalizations.of(context).noMessages,
                     textAlign: TextAlign.center,
                   ),
                 ),

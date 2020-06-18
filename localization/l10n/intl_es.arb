@@ -166,5 +166,20 @@
   "@sendMessage": {
     "type": "text",
     "placeholders": {}
+  },
+  "changeLightDarkMode": "Cambiar modo día/noche",
+  "@changeLightDarkMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeLanguage": "Cambiar idioma",
+  "@changeLanguage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "directions": "Itinerario",
+  "@directions": {
+    "type": "text",
+    "placeholders": {}
   }
 }

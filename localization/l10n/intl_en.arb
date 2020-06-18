@@ -166,5 +166,20 @@
   "@sendMessage": {
     "type": "text",
     "placeholders": {}
+  },
+  "changeLightDarkMode": "Change light/dark mode",
+  "@changeLightDarkMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeLanguage": "Change language",
+  "@changeLanguage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "directions": "Directions",
+  "@directions": {
+    "type": "text",
+    "placeholders": {}
   }
 }

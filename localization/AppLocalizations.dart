@@ -165,6 +165,10 @@ class AppLocalizations {
   String get changeLanguage { // "Cambiar idioma"
     return Intl.message('Change language', name: 'changeLanguage');
   }
+
+  String get directions { // "Itinerario"
+    return Intl.message('Directions', name: 'directions');
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

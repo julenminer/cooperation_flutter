@@ -91,7 +91,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                             MyApp.changeTheme(context);
                           },
                           child: Text(
-                            AppLocalizations().changeLightDarkMode,
+                            AppLocalizations.of(context).changeLightDarkMode,
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -128,7 +128,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                                       Align(
                                         alignment: Alignment.centerRight,
                                         child: FlatButton(
-                                          child: new Text(AppLocalizations().cancel),
+                                          child: new Text(AppLocalizations.of(context).cancel),
                                           textColor: Theme.of(context).accentColor,
                                           onPressed: () {
                                             Navigator.of(context).pop();
@@ -143,7 +143,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
 
                           },
                           child: Text(
-                            AppLocalizations().changeLanguage,
+                            AppLocalizations.of(context).changeLanguage,
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
@@ -191,7 +191,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                     });
                   },
                   child: Text(
-                    AppLocalizations().editProfile,
+                    AppLocalizations.of(context).editProfile,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -221,7 +221,7 @@ class _ProfileGUIState extends State<ProfileGUI> {
                     );
                   },
                   child: Text(
-                    AppLocalizations().logOut,
+                    AppLocalizations.of(context).logOut,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

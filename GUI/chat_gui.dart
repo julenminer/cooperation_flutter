@@ -64,7 +64,7 @@ class _ChatGUIState extends State<ChatGUI> {
                   child: _conversationIdState == null
                       ? Center(
                           child: Text(
-                          AppLocalizations().sendFirstMessage,
+                          AppLocalizations.of(context).sendFirstMessage,
                           textAlign: TextAlign.end,
                         ))
                       : Container(
@@ -143,7 +143,7 @@ class _ChatGUIState extends State<ChatGUI> {
                   controller: _controller,
                   textCapitalization: TextCapitalization.sentences,
                   autocorrect: true,
-                  placeholder: AppLocalizations().message,
+                  placeholder: AppLocalizations.of(context).message,
                   prefix: SizedBox(
                     width: 8,
                   ),

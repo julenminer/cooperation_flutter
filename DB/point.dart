@@ -1,10 +1,13 @@
+
+import 'dart:io';
+
 import 'package:cache_image/cache_image.dart';
-import 'package:cooperation/BL/chat_bl.dart';
 import 'package:cooperation/BL/user_bl.dart';
 import 'package:cooperation/GUI/chat_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Point {
   final int id;
@@ -65,7 +68,7 @@ class Point {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Center(child: Text(AppLocalizations().information)),
+                      Center(child: Text(AppLocalizations.of(context).information)),
                       SizedBox(
                         height: 8,
                       ),
@@ -101,6 +104,23 @@ class Point {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
+                          IconButton(
+                              icon: Icon(Icons.directions),
+                              tooltip: AppLocalizations.of(context).directions,
+                              onPressed: () async {
+                                if(Platform.isIOS){
+                                  final String appleMapsUrl = "https://maps.apple.com/?daddr=$latitude,$longitude";
+                                  if (await canLaunch(appleMapsUrl)) {
+                                    await launch(appleMapsUrl, forceSafariVC: false);
+                                  }
+                                } else {
+                                  //final String googleMapsUrl = "comgooglemaps://?daddr=$latitude,$longitude";
+                                  final String googleMapsUrl = "https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude";
+                                  if (await canLaunch(googleMapsUrl)) {
+                                    await launch(googleMapsUrl);
+                                  }
+                                }
+                              })
                         ],
                       ),
                       SizedBox(
@@ -132,7 +152,7 @@ class Point {
                                       new BorderRadius.circular(30.0)),
                               onPressed: () => Navigator.pop(context),
                               child: Text(
-                                AppLocalizations().close,
+                                AppLocalizations.of(context).close,
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -164,7 +184,7 @@ class Point {
                                           ));
                                     },
                               child: Text(
-                                AppLocalizations().sendMessage,
+                                AppLocalizations.of(context).sendMessage,
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),

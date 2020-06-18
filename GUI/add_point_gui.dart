@@ -50,8 +50,8 @@ class _AddPointGUIState extends State<AddPointGUI> {
             iconTheme: IconThemeData(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             title: Text(
               widget.pointType == PointType.help
-                  ? AppLocalizations().askForHelp
-                  : AppLocalizations().offerYourHelp,
+                  ? AppLocalizations.of(context).askForHelp
+                  : AppLocalizations.of(context).offerYourHelp,
               style: TextStyle(color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white),
             ),
             backgroundColor: Colors.transparent,
@@ -68,9 +68,9 @@ class _AddPointGUIState extends State<AddPointGUI> {
                     controller: _titleController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                        labelText: AppLocalizations().title,
+                        labelText: AppLocalizations.of(context).title,
                         errorText: _titleValidate
-                            ? AppLocalizations().titleError
+                            ? AppLocalizations.of(context).titleError
                             : null),
                   ),
                   TextField(
@@ -78,16 +78,16 @@ class _AddPointGUIState extends State<AddPointGUI> {
                     controller: _descriptionController,
                     textCapitalization: TextCapitalization.sentences,
                     decoration: InputDecoration(
-                        labelText: AppLocalizations().description,
+                        labelText: AppLocalizations.of(context).description,
                         errorText: _descriptionValidate
-                            ? AppLocalizations().descriptionError
+                            ? AppLocalizations.of(context).descriptionError
                             : null),
                   ),
                   SizedBox(
                     height: 16,
                   ),
                   Text(
-                    AppLocalizations().location,
+                    AppLocalizations.of(context).location,
                     style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(
@@ -190,7 +190,7 @@ class _AddPointGUIState extends State<AddPointGUI> {
                       child: _isLoading
                           ? LinearProgressIndicator()
                           : Text(
-                              AppLocalizations().publish,
+                              AppLocalizations.of(context).publish,
                               style: TextStyle(fontSize: 18),
                             ),
                     ),

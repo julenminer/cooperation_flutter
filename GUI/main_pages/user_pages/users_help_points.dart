@@ -93,7 +93,7 @@ class _ListItemState extends State<ListItem> {
           ),
           Column(
             children: <Widget>[
-              Text(AppLocalizations().showQ),
+              Text(AppLocalizations.of(context).showQ),
               (isAppleDevice)
                   ? CupertinoSwitch(
                       value: _isChecked,
