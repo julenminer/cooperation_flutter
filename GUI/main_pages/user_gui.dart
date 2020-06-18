@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:cooperation/GUI/main_pages/user_pages/profile_gui.dart';
-import 'package:cooperation/GUI/main_pages/user_pages/users_help_points.dart';
-import 'package:cooperation/GUI/main_pages/user_pages/users_offer_points.dart';
+import 'package:cooperation/GUI/main_pages/user_pages/users_help_points_gui.dart';
+import 'package:cooperation/GUI/main_pages/user_pages/users_offer_points_gui.dart';
 import 'package:cooperation/localization/AppLocalizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
